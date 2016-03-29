@@ -33,3 +33,30 @@
 (define (sub-interval x y)
   (make-interval (- (lower-bound x) (upper-bound y))
 		 (- (upper-bound x) (lower-bound y))))
+
+(define (make-center-width c w)
+  (make-interval (- c w) (+ c w)))
+
+(define (center i)
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+(define (width i)
+  (/ (- (upper-bound i) (upper-bound i)) 2))
+
+(define (make-center-percent c p)
+  (make-interval (* c (- 1 p))
+		 (* c (+ 1 p))))
+
+(define (percent i)
+  (let ((l (lower-bound i))
+	(u (upper-bound i)))
+    (/ (- u l) (+ u l))))
+
+
+
+;;;;2.14-2.16;;;;;;
+;个人见解，电阻公式相当于(x, y)的二元函数。
+;而二元函数在给定区间求极值，并不一定在x或y的上下界
+;在算(/ (* r1 r2) (+ r1 r2))时，加法和乘法取得极值的点并不相同
+;而(/ 1 (+ (/ 1 r1) (/ 1 r2)))反倒是在极值点取得极值，所以结果必然不同
+;更多可以参考二元函数求极值的问题
